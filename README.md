@@ -1,45 +1,114 @@
-Student Ticketing System In Java
+package group4ticketingsystem;
 
-The base/skeletal would be first worked on by the both team
--this is the master code or the source since ito dito na tayo magbabranch out
+/**
+ *
+ * @author russel rome
+ */
+public class Person {
+    private String lastName;
+    private String firstName;
 
-->must include
-basic collection
-basic input and output
-(ung simple lang muna na main menu)
+    public Person(String lastName, String firstName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
 
-Team 1:
-Collection logic and system
--kayo gagawa nung logic ng code (duh) 
+    public String getFullName() {
+        return lastName + " " + firstName; // Dynamically generate full name
+    }
 
-->must include
-add data
-edit data
-view data
+    public void setFullName(String lastName, String firstName) {
+        this.lastName = lastName;
+        this.firstName = firstName;
+    }
+}
 
-Team 2:
-File handling
--kayo gagawa ng pagsasave ng data in a temporary storage
-Error handling
--ensure proper error handling sa lahat ng code
+-----------
+package group4ticketingsystem;
 
-must include
-->
-save information
-delete information
+import java.util.ArrayList;
+import java.util.List;
 
-future additions:
-search,filter ___
+/**
+ *
+ * @author russel rome
+ */
+public class Student extends Person{
+    public String studentNumber;
+    public String courseProgram;
+    private List<Offense> offenses;
 
+    public Student(String lastName, String firstName, String fullName, String studentNumber, String courseProgram) {
+        super(lastName, firstName);
+        this.studentNumber = studentNumber;
+        this.courseProgram = courseProgram;
+        this.offenses = new ArrayList<>();
+    }
 
+    // Method para mag add ng violation(s)/offense(s), cuh
+    public void addOffense(Offense offense) {
+        offenses.add(offense);
+    }
 
-TIME FRAME :
+    public String getStudentDetails() {
+        StringBuilder details = new StringBuilder();
+        details.append("Student Number: ").append(studentNumber).append("\n")
+               .append("Full Name: ").append(getFullName()).append("\n")
+               .append("Course Program: ").append(courseProgram).append("\n\n");
+        
+        // SQL-like table for offenses, cuh
+        details.append("+------------+-----------------+--------+--------------------------------+\n");
+        details.append("| Offense ID | Category        | Degree | Details                        |\n");
+        details.append("+------------+-----------------+--------+--------------------------------+\n");
+        for (Offense offense : offenses) {
+            details.append(offense.toString()).append("\n");
+        }
+        details.append("+------------+-----------------+--------+--------------------------------+\n");
 
-23 -> Base skeletal done
-24 -> separated works finished (along with optional addition)
-25 -> debugging
-26 ->recording
+        return details.toString();
+    }
+}
+--------
+package group4ticketingsystem;
 
+/**
+ *
+ * @author russel rome
+ */
+public class Offense {
+    private int offenseID;
+    private String category;
+    private int degree;
+    private String details;
 
+    public Offense(int offenseID, String category, int degree, String details) {
+        this.offenseID = offenseID;
+        this.category = category;
+        this.degree = degree;
+        this.details = details;
+    }
 
+    // Getters, cuh
+
+    public int getOffenseID() {
+        return offenseID;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public int getDegree() {
+        return degree;
+    }
+
+    public String details() {
+        return details;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%-10d | %-15s | %-6d | %-30s", offenseID, category, degree, details);
+    }
+}
 
