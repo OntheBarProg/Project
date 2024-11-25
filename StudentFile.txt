@@ -1,0 +1,10 @@
+Student Number: 20231001
+Full Name: Doe John
+Course Program: Computer Science
+
++------------+-----------------+--------+--------------------------------+
+| Offense ID | Category        | Degree | Details                        |
++------------+-----------------+--------+--------------------------------+
+1          | Cheating        | 2      | Caught cheating during an exam.
+2          | Plagiarism      | 1      | Submitted plagiarized code.   
++------------+-----------------+--------+--------------------------------+
