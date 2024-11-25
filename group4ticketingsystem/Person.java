@@ -14,7 +14,7 @@ public class Person {
     }
 
     public String getFullName() {
-        return lastName + " " + firstName; // Dynamically generate full name
+        return lastName + " , " + firstName; // Dynamically generate full name
     }
 
     public void setFullName(String lastName, String firstName) {
