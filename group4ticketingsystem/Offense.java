@@ -1,9 +1,5 @@
 package group4ticketingsystem;
 
-/**
- *
- * @author russel rome
- */
 public class Offense {
     private int offenseID;
     private String category;
@@ -37,6 +33,6 @@ public class Offense {
 
     @Override
     public String toString() {
-        return String.format("%-10d | %-15s | %-6d | %-30s", offenseID, category, degree, details);
+        return String.format("|%-11d | %-15s | %-6d | %-31s|", offenseID, category, degree, details);
     }
 }
