@@ -8,6 +8,8 @@ public class Main {
         int option;
         boolean isRunning = true;
         Scanner scanner = new Scanner(System.in);
+        FileHandler fileHandler = new FileHandler();
+        File file = new File("StudentFile.txt");
 
         do{
             System.out.println("+---------------------------------------------------+");
@@ -21,27 +23,49 @@ public class Main {
             System.out.print("OPTION: ");
             option = scanner.nextInt();
             System.out.println("+---------------------------------------------------+");
+                System.out.println();
 
             switch (option) {
                 case 1:
-                    System.out.println("+---------------------------------------------------+");
-                    System.out.println("|   NEW RECORD                                      |");
-                    System.out.println("+---------------------------------------------------+");
+                    System.out.println("+------------------------------------------------------------------------+");
+                    System.out.println("|   NEW RECORD                                                           |");
+                    System.out.println("+------------------------------------------------------------------------+");
                     System.out.println("");
+                    Student student = new Student("Doe", "John", "John Doe", "20231001", "Computer Science");
+                    Offense offense1 = new Offense(1, "Cheating", 2, "Caught cheating during an exam.");
+                    Offense offense2 = new Offense(2, "Plagiarism", 1, "Submitted plagiarized code.");
+                    
+                    
+                    student.addOffense(offense1);
+                    student.addOffense(offense2);
+
+                    
+                    System.out.println(student.getStudentDetails());
+                    System.out.println("+------------------------------------------------------------------------+");
+                    
+
+                    
+                    
+                    fileHandler.WriteFile(student);
+                    System.out.println("SUCCESSFULLY WRITTEN...");
+                    System.out.println();
                     break;
 
                 case 2:
-                    System.out.println("+---------------------------------------------------+");
-                    System.out.println("|   SEARCH                                          |");
-                    System.out.println("+---------------------------------------------------+");
+                    System.out.println("+------------------------------------------------------------------------+");
+                    System.out.println("|   SEARCH                                                               |");
+                    System.out.println("+------------------------------------------------------------------------+");
                     System.out.println("");
                     break;
 
                 case 3:
-                    System.out.println("+---------------------------------------------------+");
-                    System.out.println("|   VIEW                                            |");
-                    System.out.println("+---------------------------------------------------+");
+                    System.out.println("+------------------------------------------------------------------------+");
+                    System.out.println("|   VIEW                                                                 |");
+                    System.out.println("+------------------------------------------------------------------------+");
                     System.out.println("");
+                    System.out.println("READING...");
+                    fileHandler.ReadFile(file);  
+                    System.out.println();
                     break;
             
                 default:
