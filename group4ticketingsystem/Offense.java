@@ -1,13 +1,14 @@
 package group4ticketingsystem;
 
 public class Offense {
-    private int offenseID;
+    private static int offenceIDCounter = 0;
+    private final int offenseID;
     private String category;
     private int degree;
     private String details;
 
-    public Offense(int offenseID, String category, int degree, String details) {
-        this.offenseID = offenseID;
+    public Offense(String category, int degree, String details) {
+        this.offenseID = ++offenceIDCounter;
         this.category = category;
         this.degree = degree;
         this.details = details;

@@ -24,33 +24,48 @@ public class Main {
             System.out.println("+---------------------------------------------------+");
             System.out.print("OPTION: ");
             option = scanner.nextInt();
+            scanner.nextLine();
             System.out.println("+---------------------------------------------------+");
                 System.out.println();
 
             switch (option) {
                 case 1:
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("|   NEW RECORD                                                           |");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("");
-                    Student student = new Student("Doe", "John", "John Doe", "20231001", "Computer Science");
-                    Offense offense1 = new Offense(1, "Cheating", 2, "Caught cheating during an exam.");
-                    Offense offense2 = new Offense(2, "Plagiarism", 1, "Submitted plagiarized code.");
-                    
-                    
-                    student.addOffense(offense1);
-                    student.addOffense(offense2);
+                System.out.println("+------------------------------------------------------------------------+");
+                System.out.println("|   NEW RECORD                                                           |");
+                System.out.println("+------------------------------------------------------------------------+");
+                System.out.println();
 
-                    
-                    System.out.println(student.getStudentDetails());
-                    
+                System.out.println("Enter Student Last Name:");
+                String Ltemp = scanner.nextLine();
+                System.out.println("Enter Student First Name:");
+                String Ftemp = scanner.nextLine();
+                String tempfulln = Ftemp + " " + Ltemp;
+                System.out.println("Enter Student Number:");
+                String stunumtemp = scanner.nextLine();
+                System.out.println("Enter Student Course:");
+                String coursetemp = scanner.nextLine();
 
-                    
-                    
-                    filehandler.WriteFile(student);
-                    System.out.println("SUCCESSFULLY WRITTEN...");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println();
+                Student newStudent = new Student(Ltemp, Ftemp, tempfulln, stunumtemp, coursetemp);
+                StudentList.add(newStudent);
+
+                System.out.println("Do you wanna add an offense?(yes/no)");
+                String offensechoice = scanner.nextLine();
+                while(offensechoice.equalsIgnoreCase("yes")){
+                    System.out.println("Offense Category");
+                    String category = scanner.nextLine();
+                    System.out.println("Enter Offense Degree:");
+                    int degree = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Enter Offense Details:");
+                    String details = scanner.nextLine();
+
+                    Offense newOffense = new Offense(category, degree, details);
+                    newStudent.addOffense(newOffense);
+
+                    System.out.println("Offense added: " + newOffense);
+                    System.out.println("Do you want to add another offense? (yes/no)");
+                    offensechoice = scanner.nextLine();
+                }
                     break;
 
                 case 2:
