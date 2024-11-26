@@ -6,12 +6,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Filehandler  {
-    
+    private File filelink;
+
+    Filehandler(File file){
+        this.filelink = file;
+    }
 
 
     public void WriteFile(Student student){
     try{
-    FileWriter writing = new FileWriter("StudentFile.txt");
+    FileWriter writing = new FileWriter(filelink,true);
 
         
         writing.append(student.getStudentDetails());
