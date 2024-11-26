@@ -13,7 +13,7 @@ public class Person {
         this.firstName = firstName;
     }
 
-    public String getFullName() {
+    public String getFullName(){
         return lastName + " , " + firstName; // Dynamically generate full name
     }
 

@@ -5,10 +5,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class Filehandler  {
+public class customFilehandler  {
     private File filelink;
 
-    Filehandler(File file){
+    customFilehandler(File file){
         this.filelink = file;
     }
 

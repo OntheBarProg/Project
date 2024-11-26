@@ -10,7 +10,8 @@ public class Main {
         boolean isRunning = true;
         Scanner scanner = new Scanner(System.in);
         File file = new File("StudentFile.txt");
-        Filehandler filehandler = new Filehandler(file);
+        customFilehandler filehandler = new customFilehandler(file);
+        ArrayList<Student> StudentList = new ArrayList<>();
 
         do{
             System.out.println("+---------------------------------------------------+");
