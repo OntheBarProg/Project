@@ -108,6 +108,7 @@ package group4ticketingsystem;
 //         }while(isRunning);
 //     }
 // }
+
 import java.util.*;
 import java.io.*;
 
@@ -115,9 +116,9 @@ public class Main {
     private static ArrayList<Student> StudentList = new ArrayList<>();
     private Scanner scanner = new Scanner (System.in);
     private File file = new File("StudentFile.txt");
-    private customFileHandler filehandler = new customFileHandler(file);
+    private FileHandler filehandler = new FileHandler(file);
     
-    public Main(ArrayList<Student> StudentList, Scanner scanner, File file, customFileHandler filehandler){
+    public Main(ArrayList<Student> StudentList, Scanner scanner, File file, FileHandler filehandler){
         this.StudentList = StudentList;
         this.scanner = scanner;
         this.file = file;
@@ -178,7 +179,7 @@ public class Main {
             offensechoice = scanner.nextLine();
         }
         filehandler.WriteFile(newStudent);
-        System.out.println("Student details written to file.");
+        System.out.println("SUCCESSFULLY WRITTEN...");
         System.out.println("+---------------------------------------------------+");
         System.out.println();
     }
@@ -187,19 +188,17 @@ public class Main {
         //TODO 
     }
     
-    void viewRecords(){
+    void viewRecords () {
         System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("|   VIEW                                                                 |");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("");
-                    System.out.println("READING...");
-                    filehandler.ReadFile(file);
-                    System.out.println("SUCCESSFULLY READ...");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println();
+        System.out.println("|   VIEW                                                                 |");
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("");
+        filehandler.ReadFile();
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println();
     }
-    
-    void start(){
+
+    void start() {
         boolean isRunning = true;
         do{
             main();
@@ -234,7 +233,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         File file = new File("StudentFile.txt");
-        customFileHandler filehandler = new customFileHandler(file);
+        FileHandler filehandler = new FileHandler(file);
         Main program = new Main(StudentList, scanner, file, filehandler);
         program.start();
     }
