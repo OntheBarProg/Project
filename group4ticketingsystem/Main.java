@@ -41,13 +41,13 @@ public class Main {
 
                     
                     System.out.println(student.getStudentDetails());
-                    System.out.println("+------------------------------------------------------------------------+");
                     
 
                     
                     
                     fileHandler.WriteFile(student);
                     System.out.println("SUCCESSFULLY WRITTEN...");
+                    System.out.println("+------------------------------------------------------------------------+");
                     System.out.println();
                     break;
 
@@ -64,7 +64,9 @@ public class Main {
                     System.out.println("+------------------------------------------------------------------------+");
                     System.out.println("");
                     System.out.println("READING...");
-                    fileHandler.ReadFile(file);  
+                    fileHandler.ReadFile(file);
+                    System.out.println("SUCCESSFULLY READ...");
+                    System.out.println("+------------------------------------------------------------------------+");
                     System.out.println();
                     break;
             
