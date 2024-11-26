@@ -1,5 +1,6 @@
 package group4ticketingsystem;
 
+
 import java.util.*;
 import java.io.*;
 
@@ -101,8 +102,34 @@ public class Main {
         // fileHandler.WriteFile(student);
         // System.out.println("Student details written to file.");
         // System.out.println();
+        // fileHandler.WriteFile(student);
+        // System.out.println("Student details written to file.");
+        // System.out.println();
 
         
+        // System.out.println("Reading student details from file:");
+        // fileHandler.ReadFile(file);
+
+        // Student student1 = new Student("Dela Cruz", "John", "John Dela Cruz", "20231001", "Computer Science");
+        // Offense offense3 = new Offense(1, "Bullying", 2, "Bullying one of his collegues.");
+        // Offense offense4 = new Offense(2, "Plagiarism", 1, "Submitted plagiarized code.");
+
+        // student1.addOffense(offense3);
+        // student1.addOffense(offense4);
+
+        // System.out.println(student.getStudentDetails());
+
+        // FileHandler fileHandler1 = new FileHandler();
+        // File file1 = new File("StudentFile.txt");
+        
+        // fileHandler1.WriteFile(student1);
+        // System.out.println("Student details written to file.");
+        // System.out.println();
+
+        
+        // System.out.println("Reading student details from file:");
+        // fileHandler1.ReadFile(file1);
+
         // System.out.println("Reading student details from file:");
         // fileHandler.ReadFile(file);
 
