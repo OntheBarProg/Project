@@ -10,7 +10,7 @@ public class FileHandler {
     private File filelink;
 
     // Constructor that sets the file
-    public FileHandler(File file){
+    FileHandler(File file){
         this.filelink = file;
     }
 
