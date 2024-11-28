@@ -1,173 +1,226 @@
 package group4ticketingsystem;
 
-
 import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        int option;
-        boolean isRunning = true;
-        Scanner scanner = new Scanner(System.in);
-        File file = new File("StudentFile.txt");
-        Filehandler filehandler = new Filehandler(file);
-        ArrayList<Student> StudentList = new ArrayList<>();
+    private static ArrayList<Student> StudentList = new ArrayList<>();
+    private Scanner scanner = new Scanner (System.in);
+    private File file = new File("StudentFile.txt");
+    private FileHandler filehandler = new FileHandler(file);
+    
+    public Main(ArrayList<Student> StudentList, Scanner scanner, File file, FileHandler filehandler) {
+        this.StudentList = StudentList;
+        this.scanner = scanner;
+        this.file = file;
+        this.filehandler = filehandler;
+    }
+    
+    void main() {
+        System.out.println("+---------------------------------------------------+");
+        System.out.println("|                       MENU                        |");
+        System.out.println("+---------------------------------------------------+");
+        System.out.println("|  [1] - ADD RECORD                                 |");
+        System.out.println("|  [2] - SEARCH RECORDS                             |");
+        System.out.println("|  [3] - VIEW RECORDS                               |");
+        System.out.println("|  [4] - EXIT                                       |");
+        System.out.println("+---------------------------------------------------+");
+        System.out.print("OPTION: ");
+    }
+    
+    void addRecord(){
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("|   NEW RECORD                                                           |");
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println();
 
-        do{
-            System.out.println("+---------------------------------------------------+");
-            System.out.println("|                       MENU                        |");
-            System.out.println("+---------------------------------------------------+");
-            System.out.println("|  [1] - ADD RECORD                                 |");
-            System.out.println("|  [2] - SEARCH RECORDS                             |");
-            System.out.println("|  [3] - VIEW RECORDS                               |");
-            System.out.println("|  [4] - EXIT                                       |");
-            System.out.println("+---------------------------------------------------+");
-            System.out.print("OPTION: ");
-            option = scanner.nextInt();
+        System.out.print("Enter Student Last Name: ");
+        String lastName = scanner.nextLine();
+        System.out.print("Enter Student First Name: ");
+        String firstName = scanner.nextLine();
+        String fullName = firstName + " " + lastName;
+        System.out.print("Enter Student Number (202XXXXXX): ");
+        String studentNumber = scanner.nextLine();
+        System.out.print("Enter Student Course: ");
+        String courseProgram = scanner.nextLine();
+        System.out.println();
+
+        Student newStudent = new Student(lastName, firstName, fullName, studentNumber, courseProgram);
+        StudentList.add(newStudent);
+
+        System.out.print("Do you wanna add an offense [Y|N]: ");
+        String offensechoice = scanner.nextLine();
+        System.out.println();
+        while(offensechoice.equalsIgnoreCase("Y")){
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|   OFFENSES                                                             |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|   ACADEMICS                                                            |");
+            System.out.println("|   C       -   Cheating                                                 |");
+            System.out.println("|   IDOAM   -   Illegal Distribution of Academic Materials               |");
+            System.out.println("|   MOAM    -   Misuse of Academic Materials                             |");
+            System.out.println("|   P       -   Plagiarism                                               |");
+            System.out.println("|                                                                        |");
+            System.out.println("|   SOCIAL                                                               |");
+            System.out.println("|   B       -   Bullying                                                 |");
+            System.out.println("|   CB      -   Cyber Bullying                                           |");
+            System.out.println("|   SA      -   Sexual Assault                                           |");
+            System.out.println("|                                                                        |");
+            System.out.println("|   INSTITUTIONAL                                                        |");
+            System.out.println("|   POF     -   Pocession of Fire Arms                                   |");
+            System.out.println("|   S|V     -   Smoking | Vaping                                         |");
+            System.out.println("|   DOSP    -   Destruction of School Property                           |");
+            System.out.println("|   IWOIU   -   Improper Wearing of Institutional Uniform [M|TH]         |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println();
+            System.out.print("Offense Category: ");
+            String category = scanner.nextLine();
+            System.out.println();
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|   DEGREE OF OFFENSE                                                    |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("| LEVEL | SEVERITY     | DESCRIPTION                                     |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|  1    | Minor        | Minor infractions causing minimal harm or       |");
+            System.out.println("|       |              | disruption. Typically results in a warning.     |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|  2    | Moderate     | Infractions causing mild harm or disruption.    |");
+            System.out.println("|       |              | Require formal warnings or corrective actions.  |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|  3    | Significant  | Serious offenses negatively impacting others.   |");
+            System.out.println("|       |              | Result in disciplinary action.                  |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|  4    | Severe       | Severe offenses causing serious harm or         |");
+            System.out.println("|       |              | major breaches of rules. May lead to legal      |");
+            System.out.println("|       |              | actions or suspension.                          |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println("|  5    | Critical     | Extremely serious offenses causing substantial  |");
+            System.out.println("|       |              | harm. Often result in expulsion or criminal     |");
+            System.out.println("|       |              | prosecution.                                    |");
+            System.out.println("+------------------------------------------------------------------------+");
+            System.out.println();
+            System.out.print("Enter Offense Degree: ");
+            int degree = scanner.nextInt();
+            System.out.println();
             scanner.nextLine();
-            System.out.println("+---------------------------------------------------+");
-                System.out.println();
+            System.out.print("Enter Offense Details: ");
+            String details = scanner.nextLine();
 
-            switch (option) {
-                case 1:
-                System.out.println("+------------------------------------------------------------------------+");
-                System.out.println("|   NEW RECORD                                                           |");
-                System.out.println("+------------------------------------------------------------------------+");
-                System.out.println();
+            Offense newOffense = new Offense(category, degree, details);
+            newStudent.addOffense(newOffense);
 
-                System.out.println("Enter Student Last Name:");
-                String Ltemp = scanner.nextLine();
-                System.out.println("Enter Student First Name:");
-                String Ftemp = scanner.nextLine();
-                String tempfulln = Ftemp + " " + Ltemp;
-                System.out.println("Enter Student Number:");
-                String stunumtemp = scanner.nextLine();
-                System.out.println("Enter Student Course:");
-                String coursetemp = scanner.nextLine();
-
-                Student newStudent = new Student(Ltemp, Ftemp, tempfulln, stunumtemp, coursetemp);
-                StudentList.add(newStudent);
-
-                System.out.println("Do you wanna add an offense?(yes/no)");
-                String offensechoice = scanner.nextLine();
-                while(offensechoice.equalsIgnoreCase("yes")){
-                    System.out.println("Offense Category");
-                    String category = scanner.nextLine();
-                    System.out.println("Enter Offense Degree:");
-                    int degree = scanner.nextInt();
-                    scanner.nextLine();
-                    System.out.println("Enter Offense Details:");
-                    String details = scanner.nextLine();
-
-                    Offense newOffense = new Offense(category, degree, details);
-                    newStudent.addOffense(newOffense);
-
-                    System.out.println("Offense added: " + newOffense);
-                    System.out.println("Do you want to add another offense? (yes/no)");
-                    offensechoice = scanner.nextLine();
+            System.out.println("Offense added");
+            System.out.println(newStudent.getStudentDetails());
+            System.out.println();
+            System.out.print("Do you want to add another offense [Y|N]: ");
+            offensechoice = scanner.nextLine();
+        }
+        filehandler.WriteFile(newStudent);
+        System.out.println("SUCCESSFULLY WRITTEN...");
+        System.out.println("+---------------------------------------------------+");
+        System.out.println();
+    }
+    
+    void searchRecords() {
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("|   SEARCH                                                               |");
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println(""); 
+    
+        if (file.length() != 0) {
+            try {
+                System.out.println("Enter Student Number to be searched:");
+                String tempSearch = scanner.nextLine();
+    
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                boolean found = false;
+    
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains("Student Number: " + tempSearch)) {
+                        specificprint(reader, line);
+                        found = true;
+                        break;
+                    }
                 }
-                    break;
+    
+                if (!found) {
+                    System.out.println("Data not found.");
+                }
+    
+                reader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("File does not exist.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while reading the file.");
+            }
+        } else {
+            System.out.println("File is empty.");
+        }
+    }
 
+    void specificprint(BufferedReader reader, String startLine) throws IOException {
+        System.out.println("\nRecord found:");
+        System.out.println(startLine); // Print the line where the student was found
+    
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+    
+            // Stop printing when you reach a logical end of the section
+            if (line.startsWith("==========================================================================")) {
+                break;
+            }
+        }
+    }
+    
+    void viewRecords () {
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("|   VIEW                                                                 |");
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("");
+        filehandler.ReadFile();
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println();
+    }
+
+    void start() {
+        boolean isRunning = true;
+        do{
+            main();
+            int option = scanner.nextInt(); scanner.nextLine();
+            System.out.println("+---------------------------------------------------+");
+            System.out.println();
+            switch(option){
+                case 1:
+                    addRecord();
+                    break;
                 case 2:
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("|   SEARCH                                                               |");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("");
+                    searchRecords();
                     break;
-
                 case 3:
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("|   VIEW                                                                 |");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println("");
-                    System.out.println("READING...");
-                    filehandler.ReadFile(file);
-                    System.out.println("SUCCESSFULLY READ...");
-                    System.out.println("+------------------------------------------------------------------------+");
-                    System.out.println();
+                    viewRecords();
                     break;
-
                 case 4:
                     System.out.println("EXIT...");
+                    scanner.close();
+                    System.exit(0);
                     isRunning = false;
                     break;
-            
                 default:
                     System.out.println("INVALID OPTION...");
-                    break;
-            }   
+                    break;    
+            }
         }while(isRunning);
-
-
-        // Student student = new Student("Doe", "John", "John Doe", "20231001", "Computer Science");
-        // Offense offense1 = new Offense(1, "Cheating", 2, "Caught cheating during an exam.");
-        // Offense offense2 = new Offense(2, "Plagiarism", 1, "Submitted plagiarized code.");
-        
-        
-        // student.addOffense(offense1);
-        // student.addOffense(offense2);
-
-        
-        // System.out.println(student.getStudentDetails());
-
-        
-        // FileHandler fileHandler = new FileHandler();
-        // File file = new File("StudentFile.txt");
-        
-        
-        // fileHandler.WriteFile(student);
-        // System.out.println("Student details written to file.");
-        // System.out.println();
-        // fileHandler.WriteFile(student);
-        // System.out.println("Student details written to file.");
-        // System.out.println();
-
-        
-        // System.out.println("Reading student details from file:");
-        // fileHandler.ReadFile(file);
-
-        // Student student1 = new Student("Dela Cruz", "John", "John Dela Cruz", "20231001", "Computer Science");
-        // Offense offense3 = new Offense(1, "Bullying", 2, "Bullying one of his collegues.");
-        // Offense offense4 = new Offense(2, "Plagiarism", 1, "Submitted plagiarized code.");
-
-        // student1.addOffense(offense3);
-        // student1.addOffense(offense4);
-
-        // System.out.println(student.getStudentDetails());
-
-        // FileHandler fileHandler1 = new FileHandler();
-        // File file1 = new File("StudentFile.txt");
-        
-        // fileHandler1.WriteFile(student1);
-        // System.out.println("Student details written to file.");
-        // System.out.println();
-
-        
-        // System.out.println("Reading student details from file:");
-        // fileHandler1.ReadFile(file1);
-
-        // System.out.println("Reading student details from file:");
-        // fileHandler.ReadFile(file);
-
-        // Student student1 = new Student("Dela Cruz", "John", "John Dela Cruz", "20231001", "Computer Science");
-        // Offense offense3 = new Offense(1, "Bullying", 2, "Bullying one of his collegues.");
-        // Offense offense4 = new Offense(2, "Plagiarism", 1, "Submitted plagiarized code.");
-
-        // student1.addOffense(offense3);
-        // student1.addOffense(offense4);
-
-        // System.out.println(student.getStudentDetails());
-
-        // FileHandler fileHandler1 = new FileHandler();
-        // File file1 = new File("StudentFile.txt");
-        
-        // fileHandler1.WriteFile(student1);
-        // System.out.println("Student details written to file.");
-        // System.out.println();
-
-        
-        // System.out.println("Reading student details from file:");
-        // fileHandler1.ReadFile(file1);
-
+    }
+    
+    
+    
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        File file = new File("StudentFile.txt");
+        FileHandler filehandler = new FileHandler(file);
+        Main program = new Main(StudentList, scanner, file, filehandler);
+        program.start();
     }
 }
