@@ -121,57 +121,11 @@ public class Main {
         System.out.println();
     }
     
-    void searchRecords() {
+    void searchRecords(){
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println("|   SEARCH                                                               |");
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println(""); 
-    
-        if (file.length() != 0) {
-            try {
-                System.out.println("Enter Student Number to be searched:");
-                String tempSearch = scanner.nextLine();
-    
-                BufferedReader reader = new BufferedReader(new FileReader(file));
-                String line;
-                boolean found = false;
-    
-                while ((line = reader.readLine()) != null) {
-                    if (line.contains("Student Number: " + tempSearch)) {
-                        specificprint(reader, line);
-                        found = true;
-                        break;
-                    }
-                }
-    
-                if (!found) {
-                    System.out.println("Data not found.");
-                }
-    
-                reader.close();
-            } catch (FileNotFoundException e) {
-                System.out.println("File does not exist.");
-            } catch (IOException e) {
-                System.out.println("An error occurred while reading the file.");
-            }
-        } else {
-            System.out.println("File is empty.");
-        }
-    }
-
-    void specificprint(BufferedReader reader, String startLine) throws IOException {
-        System.out.println("\nRecord found:");
-        System.out.println(startLine); // Print the line where the student was found
-    
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-    
-            // Stop printing when you reach a logical end of the section
-            if (line.startsWith("==========================================================================")) {
-                break;
-            }
-        }
     }
     
     void viewRecords () {
