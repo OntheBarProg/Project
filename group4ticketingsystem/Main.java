@@ -121,16 +121,11 @@ public class Main {
         System.out.println();
     }
     
-<<<<<<< HEAD
     void searchRecords() {
-=======
-    void searchRecords(){
->>>>>>> bca39ad4c415e5a67c956ef92586e3524ae43dda
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println("|   SEARCH                                                               |");
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println(""); 
-<<<<<<< HEAD
     
         if (file.length() != 0) {
             try {
@@ -177,8 +172,6 @@ public class Main {
                 break;
             }
         }
-=======
->>>>>>> bca39ad4c415e5a67c956ef92586e3524ae43dda
     }
     
     void viewRecords () {
@@ -189,6 +182,10 @@ public class Main {
         filehandler.ReadFile();
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println();
+    }
+
+    void deleteRecords(){
+        System.out.println("Todo");
     }
 
     void start() {
@@ -230,8 +227,4 @@ public class Main {
         Main program = new Main(StudentList, scanner, file, filehandler);
         program.start();
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bca39ad4c415e5a67c956ef92586e3524ae43dda

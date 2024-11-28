@@ -40,6 +40,8 @@ public class Student extends Person{
         details.append("+------------+-----------------+--------+--------------------------------+\n");
         details.append("==========================================================================\n");
         details.append("\n");
+        details.append("\n");
+
 
         return details.toString();
     }
