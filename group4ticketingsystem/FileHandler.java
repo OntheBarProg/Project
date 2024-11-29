@@ -21,6 +21,7 @@ public class FileHandler {
         } catch(IOException e){
             System.out.println("FILE ERROR...");
         }
+        System.out.println();
         System.out.println("SUCCESSFULLY ADDED.\n");
     }
 
