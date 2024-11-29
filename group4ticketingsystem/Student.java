@@ -50,6 +50,9 @@ public class Student extends Person{
 
         @Override
         public void studentNum(){
-            System.out.println(studentNumber);
+            System.out.println("Student Number " + studentNumber);
+        }
         
     }
+
+    

@@ -22,5 +22,5 @@ abstract class Person {
         this.firstName = firstName;
     }
 
-    public abstract void studentNum();
+    abstract void studentNum();
 }
