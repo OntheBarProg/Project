@@ -1,3 +1,6 @@
+/*
+ * MINOR REVISION
+ */
 package group4ticketingsystem;
 
 import java.util.*;
@@ -7,13 +10,14 @@ public class Main {
     private static ArrayList<Student> StudentList = new ArrayList<>();
     private Scanner scanner = new Scanner (System.in);
     private File file = new File("StudentFile.txt");
-    private FileHandler filehandler = new FileHandler(file);
+    private FileHandler fileHandler = new FileHandler(file);
+    
+    public Main(ArrayList<Student> StudentList, Scanner scanner, File file, FileHandler fileHandler) {
 
-    public Main(ArrayList<Student> StudentList, Scanner scanner, File file, FileHandler filehandler) {
         this.StudentList = StudentList;
         this.scanner = scanner;
         this.file = file;
-        this.filehandler = filehandler;
+        this.fileHandler = fileHandler;
     }
 
     void main() {
@@ -154,15 +158,16 @@ try {
             newStudent.addOffense(newOffense);
 
             System.out.println("Offense added");
+
             System.out.println();
             System.out.println(newStudent.getStudentDetails());
-            System.out.println();
+
             System.out.print("Do you want to add another offense [Y|N]: ");
             offensechoice = scanner.nextLine();
         }
-        filehandler.WriteFile(newStudent);
+        fileHandler.WriteFile(newStudent);
         System.out.println("SUCCESSFULLY WRITTEN...");
-        System.out.println("+---------------------------------------------------+");
+        System.out.println("+------------------------------------------------------------------------+");
         System.out.println();
     }
 
@@ -175,8 +180,9 @@ try {
     
         if (file.length() != 0) {
             try {
-                System.out.println("Enter Student Number to be searched:");
+                System.out.print("Enter Student Number to be searched: ");
                 String tempSearch = scanner.nextLine();
+                System.out.println();
     
                 BufferedReader reader = new BufferedReader(new FileReader(file));
                 String line;
@@ -191,22 +197,25 @@ try {
                 }
     
                 if (!found) {
-                    System.out.println("Data not found.");
+                    System.out.println("DATA NOT FOUND...");
                 }
     
                 reader.close();
             } catch (FileNotFoundException e) {
-                System.out.println("File does not exist.");
+                System.out.println("FILE DOES NOT EXIST...");
             } catch (IOException e) {
-                System.out.println("An error occurred while reading the file.");
+                System.out.println("AN ERROR OCCURED WHILE READING THE FILE...");
             }
         } else {
-            System.out.println("File is empty.");
+            System.out.println("FILE IS EMPTY...");
         }
+        System.out.println();
+        System.out.println("+------------------------------------------------------------------------+");
     }
 
     void specificprint(BufferedReader reader, String startLine) throws IOException {
-        System.out.println("\nRecord found:");
+        System.out.println("\nRECORD FOUND:");
+        System.out.println();
         System.out.println(startLine); // Print the line where the student was found
     
         String line;
@@ -214,7 +223,7 @@ try {
             System.out.println(line);
     
             // Stop printing when you reach a logical end of the section
-            if (line.startsWith("==========================================================================")) {
+            if (line.startsWith("+------------------------------------------------------------------------+")) {
                 break;
             }
         }
@@ -225,8 +234,8 @@ try {
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println("|   VIEW                                                                 |");
         System.out.println("+------------------------------------------------------------------------+");
-        System.out.println("");
-        filehandler.ReadFile();
+        System.out.println();
+        fileHandler.ReadFile();
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println();
     }
@@ -239,8 +248,9 @@ try {
     
         if (file.length() != 0) {
             try {
-                System.out.println("Enter Student Number to be deleted:");
+                System.out.print("Enter Student Number to be deleted: ");
                 String tempSearch = scanner.nextLine();
+                System.out.println();
     
                 File tempFile = new File("temp.txt");
                 BufferedReader reader = new BufferedReader(new FileReader(file));
@@ -257,7 +267,7 @@ try {
                         continue; 
                     }
     
-                    if (inSection && line.startsWith("==========================================================================")) {
+                    if (inSection && line.startsWith("+------------------------------------------------------------------------+")) {
                         inSection = false;
                         continue; 
                     }
@@ -274,21 +284,23 @@ try {
                 if (found) {
                     // Replace original file with the temporary file
                     if (file.delete() && tempFile.renameTo(file)) {
-                        System.out.println("Record successfully deleted.");
+                        System.out.println("RECORD SUCCESSFULLY DELETED...");
                     } else {
-                        System.out.println("Error replacing the file.");
+                        System.out.println("ERROR REPLACING THE FILE...");
                     }
                 } else {
-                    System.out.println("Record not found.");
+                    System.out.println("RECORD NOT FOUND...");
                     tempFile.delete();
                 }
     
             } catch (IOException e) {
-                System.out.println("An error occurred: " + e.getMessage());
+                System.out.println("AN ERROR OCCURED: " + e.getMessage());
             }
         } else {
-            System.out.println("File is empty.");
+            System.out.println("FILE IS EMPTY...");
         }
+        System.out.println();
+        System.out.println("+------------------------------------------------------------------------+");
     }
     
 
@@ -328,8 +340,8 @@ try {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         File file = new File("StudentFile.txt");
-        FileHandler filehandler = new FileHandler(file);
-        Main program = new Main(StudentList, scanner, file, filehandler);
+        FileHandler fileHandler = new FileHandler(file);
+        Main program = new Main(StudentList, scanner, file, fileHandler);
         program.start();
     }
 }
