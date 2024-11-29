@@ -13,12 +13,13 @@ public class Main {
     private FileHandler fileHandler = new FileHandler(file);
     
     public Main(ArrayList<Student> StudentList, Scanner scanner, File file, FileHandler fileHandler) {
+
         this.StudentList = StudentList;
         this.scanner = scanner;
         this.file = file;
         this.fileHandler = fileHandler;
     }
-    
+
     void main() {
         System.out.println("+---------------------------------------------------+");
         System.out.println("|                       MENU                        |");
@@ -31,7 +32,7 @@ public class Main {
         System.out.println("+---------------------------------------------------+");
         System.out.print("OPTION: ");
     }
-    
+
     void addRecord(){
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println("|   NEW RECORD                                                           |");
@@ -51,9 +52,20 @@ public class Main {
 
         Student newStudent = new Student(lastName, firstName, fullName, studentNumber, courseProgram);
         StudentList.add(newStudent);
-
+        String offensechoice ="";
+try {
+    do {
         System.out.print("Do you wanna add an offense [Y|N]: ");
-        String offensechoice = scanner.nextLine();
+        offensechoice = scanner.nextLine();
+
+        if (!offensechoice.equalsIgnoreCase("Y") && !offensechoice.equalsIgnoreCase("N")) {
+            System.out.println("Invalid Input, Enter 'Y' for Yes, 'N' for No.");
+        }
+    }while(!offensechoice.equalsIgnoreCase("Y") && !offensechoice.equalsIgnoreCase("N"));
+}catch(Exception e){
+    System.out.println("An Error has Occurred, Please Try Again");
+    return;
+}
         System.out.println();
         while(offensechoice.equalsIgnoreCase("Y")){
             System.out.println("+------------------------------------------------------------------------+");
@@ -77,8 +89,28 @@ public class Main {
             System.out.println("|   IWOIU   -   Improper Wearing of Institutional Uniform [M|TH]         |");
             System.out.println("+------------------------------------------------------------------------+");
             System.out.println();
-            System.out.print("Offense Category: ");
-            String category = scanner.nextLine();
+            String category;
+            do {
+                try {
+                    System.out.print("Offense Category: ");
+                    category = scanner.nextLine().toUpperCase();
+                    System.out.println();
+                    if (category.equals("C") || category.equals("IDOAM") || category.equals("MOAM") ||
+                            category.equals("P") || category.equals("B") || category.equals("CB") ||
+                            category.equals("SA") || category.equals("POF") || category.equals("S|V") ||
+                            category.equals("DOSP") || category.equals("IWOIU")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid Input, Enter a Valid Offense Category.");
+                        System.out.println();
+                    }
+                } catch (Exception e) {
+                    System.out.println("An Unexpected Error has Occurred, " + e.getMessage());
+                    System.out.println();
+                }
+            }while(true);
+
+
             System.out.println();
             System.out.println("+------------------------------------------------------------------------+");
             System.out.println("|   DEGREE OF OFFENSE                                                    |");
@@ -103,19 +135,33 @@ public class Main {
             System.out.println("|       |              | prosecution.                                    |");
             System.out.println("+------------------------------------------------------------------------+");
             System.out.println();
-            System.out.print("Enter Offense Degree: ");
-            int degree = scanner.nextInt();
-            System.out.println();
-            scanner.nextLine();
+            int degree = 0;
+            do{
+                try{
+                    System.out.print("Enter Offense Degree: ");
+                    degree = Integer.parseInt(scanner.nextLine());
+                    System.out.println();
+                    if (degree < 1 || degree > 5) {
+                        System.out.println("Invalid Input, Enter a number from 1 to 5.");
+                        System.out.println();
+                    }
+                }catch(NumberFormatException e) {
+                    System.out.println("Invalid Input, Enter a number from 1 to 5");
+                    System.out.println();
+                }
+            }while(degree < 1 || degree > 5);
             System.out.print("Enter Offense Details: ");
             String details = scanner.nextLine();
+            System.out.println();
 
             Offense newOffense = new Offense(category, degree, details);
             newStudent.addOffense(newOffense);
 
             System.out.println("Offense added");
+
             System.out.println();
             System.out.println(newStudent.getStudentDetails());
+
             System.out.print("Do you want to add another offense [Y|N]: ");
             offensechoice = scanner.nextLine();
         }
@@ -124,6 +170,7 @@ public class Main {
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println();
     }
+
     
     void searchRecords() {
         System.out.println("+------------------------------------------------------------------------+");
@@ -180,8 +227,9 @@ public class Main {
                 break;
             }
         }
+
     }
-    
+
     void viewRecords () {
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println("|   VIEW                                                                 |");
@@ -284,13 +332,11 @@ public class Main {
                     break;
                 default:
                     System.out.println("INVALID OPTION...");
-                    break;    
+                    break;
             }
         }while(isRunning);
     }
-    
-    
-    
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         File file = new File("StudentFile.txt");
