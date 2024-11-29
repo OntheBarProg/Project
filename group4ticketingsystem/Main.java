@@ -23,7 +23,8 @@ public class Main {
         System.out.println("|  [1] - ADD RECORD                                 |");
         System.out.println("|  [2] - SEARCH RECORDS                             |");
         System.out.println("|  [3] - VIEW RECORDS                               |");
-        System.out.println("|  [4] - EXIT                                       |");
+        System.out.println("|  [4] - DELETE A RECORD                            |");
+        System.out.println("|  [5] - EXIT                                       |");
         System.out.println("+---------------------------------------------------+");
         System.out.print("OPTION: ");
     }
@@ -165,11 +166,59 @@ try {
         System.out.println();
     }
 
-    void searchRecords(){
+    
+    void searchRecords() {
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println("|   SEARCH                                                               |");
         System.out.println("+------------------------------------------------------------------------+");
-        System.out.println("");
+        System.out.println(""); 
+    
+        if (file.length() != 0) {
+            try {
+                System.out.println("Enter Student Number to be searched:");
+                String tempSearch = scanner.nextLine();
+    
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                String line;
+                boolean found = false;
+    
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains("Student Number: " + tempSearch)) {
+                        specificprint(reader, line);
+                        found = true;
+                        break;
+                    }
+                }
+    
+                if (!found) {
+                    System.out.println("Data not found.");
+                }
+    
+                reader.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("File does not exist.");
+            } catch (IOException e) {
+                System.out.println("An error occurred while reading the file.");
+            }
+        } else {
+            System.out.println("File is empty.");
+        }
+    }
+
+    void specificprint(BufferedReader reader, String startLine) throws IOException {
+        System.out.println("\nRecord found:");
+        System.out.println(startLine); // Print the line where the student was found
+    
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+    
+            // Stop printing when you reach a logical end of the section
+            if (line.startsWith("==========================================================================")) {
+                break;
+            }
+        }
+
     }
 
     void viewRecords () {
@@ -181,6 +230,67 @@ try {
         System.out.println("+------------------------------------------------------------------------+");
         System.out.println();
     }
+
+    void deleteRecord() {
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("|   DELETE                                                               |");
+        System.out.println("+------------------------------------------------------------------------+");
+        System.out.println("");
+    
+        if (file.length() != 0) {
+            try {
+                System.out.println("Enter Student Number to be deleted:");
+                String tempSearch = scanner.nextLine();
+    
+                File tempFile = new File("temp.txt");
+                BufferedReader reader = new BufferedReader(new FileReader(file));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+    
+                String line;
+                boolean inSection = false;
+                boolean found = false;
+    
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains("Student Number: " + tempSearch)) {
+                        inSection = true;
+                        found = true;
+                        continue; 
+                    }
+    
+                    if (inSection && line.startsWith("==========================================================================")) {
+                        inSection = false;
+                        continue; 
+                    }
+    
+                    if (!inSection) {
+                        writer.write(line);
+                        writer.newLine();
+                    }
+                }
+    
+                reader.close();
+                writer.close();
+    
+                if (found) {
+                    // Replace original file with the temporary file
+                    if (file.delete() && tempFile.renameTo(file)) {
+                        System.out.println("Record successfully deleted.");
+                    } else {
+                        System.out.println("Error replacing the file.");
+                    }
+                } else {
+                    System.out.println("Record not found.");
+                    tempFile.delete();
+                }
+    
+            } catch (IOException e) {
+                System.out.println("An error occurred: " + e.getMessage());
+            }
+        } else {
+            System.out.println("File is empty.");
+        }
+    }
+    
 
     void start() {
         boolean isRunning = true;
@@ -200,6 +310,9 @@ try {
                     viewRecords();
                     break;
                 case 4:
+                    deleteRecord();
+                    break;
+                case 5:
                     System.out.println("EXIT...");
                     scanner.close();
                     System.exit(0);

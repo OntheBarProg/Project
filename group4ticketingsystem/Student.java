@@ -38,6 +38,10 @@ public class Student extends Person{
             details.append(offense.toString()).append("\n");
         }
         details.append("+------------+-----------------+--------+--------------------------------+\n");
+        details.append("==========================================================================\n");
+        details.append("\n");
+        details.append("\n");
+
 
         return details.toString();
     }
