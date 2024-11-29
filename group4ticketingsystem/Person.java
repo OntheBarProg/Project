@@ -4,7 +4,7 @@ package group4ticketingsystem;
  *
  * @author russel rome
  */
-public class Person {
+public abstract class Person {
     private String lastName;
     private String firstName;
 
@@ -21,4 +21,6 @@ public class Person {
         this.lastName = lastName;
         this.firstName = firstName;
     }
+
+    public abstract void studentNum();
 }
