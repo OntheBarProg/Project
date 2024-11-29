@@ -4,7 +4,7 @@ package group4ticketingsystem;
  *
  * @author russel rome
  */
-public abstract class Person {
+abstract class Person {
     private String lastName;
     private String firstName;
 
